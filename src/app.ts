@@ -3,7 +3,7 @@
  * @abstract Create an express app
  */
 
-import express, { Application, Request, Response } from "express";
+import express, { Application } from "express";
 import { Server } from "http";
 import parser from "cookie-parser";
 import routes from "./routes/index";
