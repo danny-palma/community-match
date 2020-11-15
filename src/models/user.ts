@@ -1,3 +1,8 @@
+/**
+ * @author Danny Palma
+ * @abstract exports the user model
+ */
+
 import { Schema, model } from "mongoose";
 import IUser from "../interfaces/user";
 
@@ -17,7 +22,7 @@ const UserSchema = new Schema({
         required: true
     },
     password: {
-        type:String,
+        type: String,
         required: true
     },
     isPremiun: {
@@ -27,6 +32,13 @@ const UserSchema = new Schema({
     joined_at: {
         type: Date,
         default: new Date()
+    },
+    notifications: {
+        type: Object
+    },
+    projects:{
+        type: Array,
+        default: []
     }
 });
 
