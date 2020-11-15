@@ -5,6 +5,7 @@
 
 import express, { Application, Request, Response } from "express";
 import { Server } from "http";
+import parser from "cookie-parser";
 import routes from "./routes/index";
 
 export default class App {
@@ -19,14 +20,10 @@ export default class App {
         this.app.set('port', process.env.PORT || this.port || 3000);
     };
     private midlewares(): void {
-
+        this.app.use(parser());
     };
     private routes(): void {
         new routes(this.app);
-        this.app.use((req: Request, res: Response) => {
-            return res.json({error: 'the page noesn\'t exist'});
-        });
-
     };
     public listen(callback: Function = () => console.log(`Server on port ${this.app.get('port')}`)): Server {
         return this.app.listen(this.app.get('port'), callback());
