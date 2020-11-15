@@ -8,7 +8,7 @@ import IRoles from "./roles";
 import Skills from "./skills";
 
 export default interface Projects extends Document {
-    projectID: string;
+    projectID: string
     name: string;
     description: string;
     links: string[];
