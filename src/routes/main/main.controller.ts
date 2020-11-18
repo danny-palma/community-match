@@ -1,6 +1,6 @@
 /**
  * @author Danny Palma
- * @abstract controller of the main route '/'
+ * @fileoverview controller of the main route '/'
  */
 
 import { Request, Response } from "express";

@@ -1,6 +1,6 @@
 /**
  * @author Danny Palma
- * @abstract Response the main route '/'
+ * @fileoverview Response the main route '/'
  */
 
 import { Router } from "express";

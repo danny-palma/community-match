@@ -1,6 +1,6 @@
 /**
  * @author Danny Palma
- * @abstract Creates interface of the proyects
+ * @fileoverview Creates interface of the proyects
  */
 
 import { Schema, model } from "mongoose";
