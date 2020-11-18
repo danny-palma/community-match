@@ -19,6 +19,7 @@ export default class App {
     };
     private config(): void {
         this.app.set('port', process.env.PORT || this.port || 3000);
+        this.app.disable('x-powered-by');
     };
     private midlewares(): void {
         this.app.use(parser());
