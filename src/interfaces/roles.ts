@@ -1,6 +1,6 @@
 /**
  * @author Danny Palma
- * @abstract Exports the interface roles for the proyects
+ * @fileoverview Exports the interface roles for the proyects
  */
 
 export default interface Roles {
