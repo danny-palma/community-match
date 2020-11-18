@@ -1,17 +1,18 @@
 /**
  * @author Danny Palma
- * @abstract Create an express app
+ * @fileoverview Create an express app
  */
-
 import express, { Application } from "express";
 import { Server } from "http";
 import parser from "cookie-parser";
 import routes from "./routes/index";
+import DBConnect from "./database";
 
 export default class App {
-    public app: Application;
+
+    public app: Application = express();
+
     constructor(private port?: string | number) {
-        this.app = express();
         this.config();
         this.midlewares();
         this.routes();
@@ -21,11 +22,13 @@ export default class App {
     };
     private midlewares(): void {
         this.app.use(parser());
+        this.app.use(express.urlencoded({ extended: true }));
     };
     private routes(): void {
         new routes(this.app);
     };
-    public listen(callback: Function = () => console.log(`Server on port ${this.app.get('port')}`)): Server {
+    public async listen(callback: Function = () => console.log(`Server on port ${this.app.get('port')}`)): Promise<Server> {
+        await DBConnect();
         return this.app.listen(this.app.get('port'), callback());
     };
 };
