@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>testing</title>
+</head>
+
+<body>
+    <h1>if you are a normal user, please don't use this</h1>
+    <h1>register</h1>
+    <form action="/users/register" style="display: flex; flex-direction: column;">
+        <input type="text" placeholder="name" id="name">
+        <input type="text" placeholder="last name" id="lastName">
+        <input type="password" placeholder="password" id="password">
+        <input type="email" placeholder="email" id="email">
+        <button type="submit">send</button>
+    </form>
+    <h1>login</h1>
+    <form action="/users/login" style="display: flex; flex-direction: column;">
+        <input type="password" placeholder="password">
+        <input type="email" placeholder="email">
+        <button type="submit">send</button>
+    </form>
+</body>
+<style>
+    * {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+    input {
+        margin: 5px 0px;
+        border: 1px solid #9c9c9c;
+        border-radius: 5px;
+    }
+</style>
+
+</html>
