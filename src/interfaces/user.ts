@@ -20,7 +20,9 @@ interface previewProject {
 };
 
 export default interface User extends Document {
+    full_name: string;
     name: string;
+    last_name: string;
     userID: string;
     email: string;
     password: string;
