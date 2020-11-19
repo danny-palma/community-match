@@ -4,7 +4,14 @@
  */
 
 import { Request, Response } from "express";
-
-export function controllerMain(req: Request, res: Response) {
-    return res.json({ status: 'all systems operational' });
+import userModel from "../../models/user";
+let lastPing = 0;
+export async function controllerMain(req: Request, res: Response) {
+    let initDB = Date.now();
+    await userModel.findOne({ email: 's' });
+    let endDB = Date.now();
+    req.on('end', () => {
+        lastPing = Date.now() - initDB;
+    })
+    return res.json({ status: 'all systems operational', ping: lastPing, pingDB: endDB - initDB });
 };
