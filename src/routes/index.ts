@@ -5,17 +5,17 @@
 
 import { Application, Request, Response, ErrorRequestHandler, NextFunction } from "express";
 import routerMain from "./main/main.router";
-import routerUsers from "./users/loggin.router";
+import routerUsers from "./users/users.router";
 import routerGui from "./gui/gui.router";
 
 export default class routes {
     constructor(private app: Application) {
         this.app.use(routerMain);
         this.app.use('/users', routerUsers);
-        if(process.env.NODE_ENV != 'production') this.developmentRoutes();
+        if (process.env.NODE_ENV != 'production') this.developmentRoutes();
         this.errors();
     };
-    private developmentRoutes(){
+    private developmentRoutes() {
         this.app.use('/gui', routerGui);
     };
     private errors() {
