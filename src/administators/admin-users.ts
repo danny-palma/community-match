@@ -9,7 +9,7 @@
  */
 
 import IUser from "../interfaces/user";
-import modelUsers from "../models/user";
+import modelUsers from "../models/users";
 import uniqid from "uniqid";
 
 

@@ -7,11 +7,13 @@ import { Application, Request, Response, ErrorRequestHandler, NextFunction } fro
 import routerMain from "./main/main.router";
 import routerUsers from "./users/users.router";
 import routerGui from "./gui/gui.router";
+import routerProjects from "./projects/projects.router";
 
 export default class routes {
     constructor(private app: Application) {
         this.app.use(routerMain);
         this.app.use('/users', routerUsers);
+        this.app.use('/projects', routerProjects);
         if (process.env.NODE_ENV != 'production') this.developmentRoutes();
         this.errors();
     };

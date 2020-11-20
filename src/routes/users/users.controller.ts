@@ -3,8 +3,8 @@
  * @fileoverview Controller for the route /users/
  */
 import { Request, Response } from "express";
-import adminUser from "../../adminUser/admin-users";
-import modelUsers from "../../models/user";
+import adminUser from "../../administators/admin-users";
+import modelUsers from "../../models/users";
 
 export async function login(req: Request, res: Response) {
     if (!req.body) return res.status(400).json({ error: 'you don\'t provide body params' });

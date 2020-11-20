@@ -4,7 +4,7 @@
  */
 
 import { Request, Response } from "express";
-import userModel from "../../models/user";
+import userModel from "../../models/users";
 let lastPing = 0;
 export async function controllerMain(req: Request, res: Response) {
     let initDB = Date.now();
