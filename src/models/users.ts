@@ -5,7 +5,6 @@
 
 import { Schema, model } from "mongoose";
 import IUser from "../interfaces/user";
-import { v4 } from "uuid";
 
 const UserSchema = new Schema({
     email: {
@@ -51,7 +50,7 @@ const UserSchema = new Schema({
     userID: {
         type: String,
         unique: true,
-        default: v4()
+        required: true
     },
     isPremiun: {
         type: Boolean,
