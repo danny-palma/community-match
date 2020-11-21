@@ -9,7 +9,8 @@ import IProjects from "../interfaces/projects";
 const ProjectsSchema = new Schema({
     projectID: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     name: {
         type: String,
