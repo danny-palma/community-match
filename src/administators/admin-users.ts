@@ -43,8 +43,12 @@ export default new class adminUsers {
     };
 
     public async existEmail(email: string): Promise<boolean> {
-        return await modelUsers.exists({ email: email });
+        return await modelUsers.findOne({ email: email }) ? true : false;
     };
+
+    public async adminGetUser(id: string) {
+        return await modelUsers.findOne({ userID: id });
+    }
 
     private setDeleteTimeOut(key: string): void {
         setTimeout(() => {
