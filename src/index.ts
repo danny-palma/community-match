@@ -12,22 +12,27 @@ let app = new App();
 
 app.listen(); */
 
-const express = require('express');
-const expbhs = require('express-handlebars')
-const path = require('path')
+import cors from "cors";
+import express from 'express';
+/* TODO: add a stripe key */
+import stripe from "stripe";
+import uuid from "uuid"
 
 // Initializations
 const app = express();
 
-// Settings
-app.set('views', path.join(__dirname, 'views'))
-app.engine('hsb', expbhs({
-    defaultLayout: 'main',
-    layoutDir: path.join(app.get('views'), 'layouts'),
-    partialDir: path.join(app.get('views'), 'layouts'),
-}))
+//Middleware
+app.use(express.json());
+app.use(cors())
 
-// Start Server
-app.listen(3000, () => {
-    console.log('Server on port', 3000)
+
+//Routes
+app.get("/", (req, res) => {
+    res.send("It works at learncodeonline")
 })
+
+// listen
+app.listen(5000, () => {
+    console.log('Server on port', 5000)
+})
+
