@@ -20,9 +20,11 @@ const path = require('path')
 const app = express();
 
 // Settings
-app.set('views')
+app.set('views', path.join(__dirname, 'views'))
 app.engine('hsb', expbhs({
-
+    defaultLayout: 'main',
+    layoutDir: path.join(app.get('views'), 'layouts'),
+    partialDir: path.join(app.get('views'), 'layouts'),
 }))
 
 // Start Server
