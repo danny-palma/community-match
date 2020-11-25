@@ -12,11 +12,16 @@ let app = new App();
 
 app.listen(); */
 
+/**
+ * @author Tech-Code
+ * @fileoverview payment gateway configuration
+ */
+
 import cors from "cors";
-import express from 'express';
-/* TODO: add a stripe key */
-import stripe from "stripe";
-import uuid from "uuid"
+import { Request, Response } from "express";
+import express from "express";
+const stripe = require("stripe")("pk_test_51HrGYuJYLSe9I9Ja5FmPqHsQGjAnskGouoVXQEWPlwo8HWHu8ecx0BQHSk7lUzxefWIcqtpolUPCZvvBPW2fBdop00nyd4otiG");
+import { v4 } from "uuid";
 
 // Initializations
 const app = express();
@@ -27,8 +32,36 @@ app.use(cors())
 
 
 //Routes
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
     res.send("It works at learncodeonline")
+})
+
+app.post("/pago", (req: Request, res: Response) => {
+    const { product, token } = req.body;
+    console.log("Plan Deluxe ", product);
+    console.log("Precio ", product.price);
+    const idempontencykey = v4();
+
+    return stripe.customers.create({
+        email: token.email,
+        source: token.id,
+    }).then((customer: { id: any; }) => {
+        stripe.charges.create({
+            amount: product.price * 100,
+            currency: 'usd',
+            customer: customer.id,
+            receipt_email: token.email,
+            description: `comprar ${product.name}`,
+            shipping: {
+                name: token.card.name,
+                address: {
+                    country: token.card.address_country
+                }
+            }
+        }, { idempontencykey });
+    })
+        .then((result: any) => res.status(200).json(result))
+        .catch((err: any) => console.log(err));
 })
 
 // listen
