@@ -23,6 +23,8 @@
     "express-handlebars": "^5.2.0",
     "mongoose": "^5.10.14",
     "nodemon": "^2.0.6",
+    "react-stripe": "^0.1.0",
+    "react-stripe-checkout": "^2.6.3",
     "string-array": "^1.0.1",
     "stripe": "^8.126.0",
     "ts-node": "^9.0.0",

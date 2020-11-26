@@ -20,8 +20,8 @@ app.listen(); */
 import cors from "cors";
 import { Request, Response } from "express";
 import express from "express";
-const stripe = require("stripe")("pk_test_51HrGYuJYLSe9I9Ja5FmPqHsQGjAnskGouoVXQEWPlwo8HWHu8ecx0BQHSk7lUzxefWIcqtpolUPCZvvBPW2fBdop00nyd4otiG");
-import { v4 } from "uuid";
+const stripe = require("stripe")("sk_test_51HrGYuJYLSe9I9Janz3sl6l23AZrBGlgrgoASmQZFSkopQPfLCygdO15VeqIxAz5QHmSLb5LfWSYuhUoBDrNcGRi00GpybT26U");
+import { v4 as uuid4 } from 'uuid';
 
 // Initializations
 const app = express();
@@ -32,37 +32,46 @@ app.use(cors())
 
 
 //Routes
-app.get("/", (req: Request, res: Response) => {
+/* app.get("/", (req: Request, res: Response) => {
     res.send("It works at learncodeonline")
 })
+ */
+
+
 
 app.post("/pago", (req: Request, res: Response) => {
     const { product, token } = req.body;
     console.log("Plan Deluxe ", product);
     console.log("Precio ", product.price);
-    const idempontencykey = v4();
+    const idempotencyKey = uuid4();
 
-    return stripe.customers.create({
-        email: token.email,
-        source: token.id,
-    }).then((customer: { id: any; }) => {
-        stripe.charges.create({
-            amount: product.price * 100,
-            currency: 'usd',
-            customer: customer.id,
-            receipt_email: token.email,
-            description: `comprar ${product.name}`,
-            shipping: {
-                name: token.card.name,
-                address: {
-                    country: token.card.address_country
-                }
-            }
-        }, { idempontencykey });
-    })
-        .then((result: any) => res.status(200).json(result))
-        .catch((err: any) => console.log(err));
-})
+
+    try {
+        return stripe.customers.create({
+            email: token.email,
+            source: token.id
+        }).then((customer: { id: string; }) => {
+            stripe.charges.create(
+                {
+                    amount: product.price * 100,
+                    currency: 'usd',
+                    customer: customer.id,
+                    receipt_email: token.email,
+                },
+                {
+                    idempotencyKey
+                });
+
+        })
+            .then((result: string) => res.status(200).json(result))
+            .catch((err: string) => console.log(err));
+
+    } catch (err) {
+        res.send(err);
+    }
+
+});
+
 
 // listen
 app.listen(5000, () => {
