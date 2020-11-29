@@ -2,7 +2,6 @@ import modelProjects from "../models/projects";
 import IProjects from "../interfaces/projects";
 import adminUsers from "./admin-users";
 import { v4 as uuidv4 } from 'uuid';
-import { convertStringToArray } from "../helpers/string-to-array";
 
 interface infoProject {
     name?: string;
@@ -43,9 +42,9 @@ export default new class AdminProjects {
             projectID: uuidv4(),
             name: infoProject.name,
             description: infoProject.description,
-            links: convertStringToArray(infoProject.links),
+            links: infoProject.links,
             ownerID: owner.userID,
-            requiredSkills: convertStringToArray(infoProject.reqiredSkills),
+            requiredSkills: infoProject.reqiredSkills,
             starts: 1,
             roles: [
                 {
