@@ -7,6 +7,7 @@ import { Server } from "http";
 import parser from "cookie-parser";
 import routes from "./routes/index";
 import DBConnect from "./database";
+import cors from "cors";
 
 export default class App {
 
@@ -24,6 +25,8 @@ export default class App {
     private midlewares(): void {
         this.app.use(parser());
         this.app.use(express.urlencoded({ extended: true }));
+        this.app.use(cors);
+        this.app.use(express.json());
     };
     private routes(): void {
         new routes(this.app);
